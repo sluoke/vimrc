@@ -418,6 +418,15 @@ snippet sm_as   传递数据
 	$smarty->assign(${0});
 snippet sm_di   模版渲染
 	$smarty->display('${0}');
+# ThinkPHP框架
+snippet tp_im   导入扩展类库
+	import('${0}');
+snippet tp_ve   导入第三方类库
+	Vendor('${0}');
+snippet tp_as   传递数据
+	$this->assign(${0});
+snippet tp_di   模版渲染
+	$this->display('${0}');
 # CodeIgniter框架
 snippet ci_ll   加载类库
 	$this->load->library('${0}');

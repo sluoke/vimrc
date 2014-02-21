@@ -1,6 +1,6 @@
 " -----------------   Author: Ruchee
 " -----------------    Email: my@ruchee.com
-" -----------------     Date: 2014-02-21 11:12
+" -----------------     Date: 2014-02-21 20:54
 " -----------------    https://github.com/ruchee/vimrc
 
 
@@ -15,7 +15,7 @@ endif
 " 设置 path 和 tags 路径
 if g:atCompany
 else
-    set tags+=D:/Ruchee/Files/code/projects/dev_site/system/tags
+    set tags+=D:/Ruchee/Files/code/projects/dev_site/tags
 endif
 
 
@@ -183,8 +183,8 @@ set shiftwidth=4
 set tabstop=4
 
 " 对部分语言设置单独的缩进
-au FileType clojure,lua,ruby,eruby,dart,coffee,slim,jade,sh set shiftwidth=2
-au FileType clojure,lua,ruby,eruby,dart,coffee,slim,jade,sh set tabstop=2
+au FileType scala,clojure,lua,ruby,eruby,dart,coffee,slim,jade,sh set shiftwidth=2
+au FileType scala,clojure,lua,ruby,eruby,dart,coffee,slim,jade,sh set tabstop=2
 
 " 根据后缀名指定文件类型
 au BufRead,BufNewFile *.h   setlocal ft=c
@@ -302,13 +302,13 @@ endf
 execute pathogen#infect()
 
 
-" 针对部分语言取消美元符的单词属性
+" 针对部分语言取消指定字符的单词属性
 au FileType clojure  set iskeyword-=.
 au FileType clojure  set iskeyword-=>
 au FileType perl,php set iskeyword-=$
 
 
-" MiniBufExplorer     多文件切换，也可使用鼠标双击相应文件名进行切换
+" MiniBufExplorer     多文件切换
 let g:miniBufExplMapWindowNavVim    = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs  = 1
@@ -341,7 +341,7 @@ let g:snipMate                             = {}
 let g:snipMate.scope_aliases               = {}
 let g:snipMate.scope_aliases['c']          = 'cpp'
 let g:snipMate.scope_aliases['php']        = 'php,html'
-let g:snipMate.scope_aliases['smarty']     = 'smarty,html'
+let g:snipMate.scope_aliases['smarty']     = 'smarty,thinkphp,html'
 let g:snipMate.scope_aliases['blade']      = 'blade,html'
 let g:snipMate.scope_aliases['twig']       = 'twig,html'
 let g:snipMate.scope_aliases['html.twig']  = 'twig,html'
@@ -374,7 +374,7 @@ let g:airline_theme = 'badwolf'                " 设置主题
 let g:syntastic_check_on_open = 1              " 默认开启
 let g:syntastic_mode_map      = {'mode': 'active',
             \'active_filetypes':  [],
-            \'passive_filetypes': ['html', 'css', 'xhtml', 'eruby', 'slim', 'jade', 'scss', 'less']
+            \'passive_filetypes': ['html', 'css', 'xhtml', 'scala', 'eruby', 'slim', 'jade', 'scss', 'less']
             \}                                 " 指定不需要检查的语言 [主要是因为开启这些语言的语法检查会妨碍到正常的工作]
 
 
@@ -502,6 +502,8 @@ func! Compile_Run_Code()
         else
             exec "!go build %:t && ./%:r"
         endif
+    elseif &filetype == "scala"
+        exec "!scala %:t"
     elseif &filetype == "clojure"
         exec "!clojure -i %:t -r"
     elseif &filetype == "lua"
@@ -514,6 +516,8 @@ func! Compile_Run_Code()
         exec "!ruby %:t"
     elseif &filetype == "dart"
         exec "!dart %:t"
+    elseif &filetype == "julia"
+        exec "!julia %:t"
     elseif &filetype == "javascript"
         exec "!node %:t"
     elseif &filetype == "coffee"
@@ -541,7 +545,7 @@ let g:vimwiki_use_mouse       = 1       " 使用鼠标映射
 let g:vimwiki_valid_html_tags = 'a,img,b,i,s,u,sub,sup,br,hr,div,del,code,red,center,left,right,h1,h2,h3,h4,h5,h6,pre,script,style'
 " 声明可以在wiki里面使用的HTML标签
 
-let blog                  = {}
+let blog                      = {}
 if g:isWIN
     let blog.path             = 'D:/Ruchee/Files/mysite/wiki/'
     let blog.path_html        = 'D:/Ruchee/Files/mysite/html/'
@@ -551,8 +555,8 @@ else
     let blog.path_html        = '~/mysite/html/'
     let blog.template_path    = '~/mysite/templates/'
 endif
-let blog.template_default = 'site'
-let blog.template_ext     = '.html'
-let blog.auto_export      = 1
+let blog.template_default     = 'site'
+let blog.template_ext         = '.html'
+let blog.auto_export          = 1
 
-let g:vimwiki_list = [blog]
+let g:vimwiki_list            = [blog]

@@ -1,6 +1,6 @@
 " -----------------   Author: Ruchee
 " -----------------    Email: my@ruchee.com
-" -----------------     Date: 2014-02-21 20:54
+" -----------------     Date: 2014-02-21 22:02
 " -----------------    https://github.com/ruchee/vimrc
 
 
@@ -15,7 +15,7 @@ endif
 " 设置 path 和 tags 路径
 if g:atCompany
 else
-    set tags+=D:/Ruchee/Files/code/projects/dev_site/tags
+    set tags+=D:/Ruchee/Files/code/projects/dev_site/system/tags
 endif
 
 

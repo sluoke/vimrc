@@ -1,6 +1,6 @@
 " -----------------   Author: Ruchee
 " -----------------    Email: my@ruchee.com
-" -----------------     Date: 2014-02-21 22:02
+" -----------------     Date: 2014-02-24 20:18
 " -----------------    https://github.com/ruchee/vimrc
 
 
@@ -15,7 +15,7 @@ endif
 " 设置 path 和 tags 路径
 if g:atCompany
 else
-    set tags+=D:/Ruchee/Files/code/projects/dev_site/system/tags
+    " set tags+=D:/Ruchee/Files/code/projects/dev_site/vendor/laravel/tags
 endif
 
 
@@ -306,6 +306,8 @@ execute pathogen#infect()
 au FileType clojure  set iskeyword-=.
 au FileType clojure  set iskeyword-=>
 au FileType perl,php set iskeyword-=$
+au FileType ruby     set iskeyword+=!
+au FileType ruby     set iskeyword+=?
 
 
 " MiniBufExplorer     多文件切换
@@ -484,24 +486,24 @@ func! Compile_Run_Code()
     exec "w"
     if &filetype == "c"
         if g:isWIN
-            exec "!gcc -Wall -std=c11 -o %:r %:t && %:r.exe"
+            exec "!gcc -Wall -o %:r %:t && %:r.exe"
         else
-            exec "!gcc -Wall -std=c11 -o %:r %:t && ./%:r"
+            exec "!gcc -Wall -o %:r %:t && ./%:r"
         endif
     elseif &filetype == "cpp"
         if g:isWIN
-            exec "!g++ -Wall -std=c++11 -o %:r %:t && %:r.exe"
+            exec "!g++ -Wall -o %:r %:t && %:r.exe"
         else
-            exec "!g++ -Wall -std=c++11 -o %:r %:t && ./%:r"
+            exec "!g++ -Wall -o %:r %:t && ./%:r"
         endif
-    elseif &filetype == "java"
-        exec "!javac %:t && java %:r"
     elseif &filetype == "go"
         if g:isWIN
             exec "!go build %:t && %:r.exe"
         else
             exec "!go build %:t && ./%:r"
         endif
+    elseif &filetype == "java"
+        exec "!javac %:t && java %:r"
     elseif &filetype == "scala"
         exec "!scala %:t"
     elseif &filetype == "clojure"
@@ -521,7 +523,7 @@ func! Compile_Run_Code()
     elseif &filetype == "javascript"
         exec "!node %:t"
     elseif &filetype == "coffee"
-        exec "!coffee %:t"
+        exec "!coffee -c %:t && coffee %:t"
     elseif &filetype == "sh"
         exec "!bash %:t"
     endif

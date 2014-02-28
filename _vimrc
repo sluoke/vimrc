@@ -1,6 +1,6 @@
 " -----------------   Author: Ruchee
 " -----------------    Email: my@ruchee.com
-" -----------------     Date: 2014-02-24 20:18
+" -----------------     Date: 2014-02-28 08:55
 " -----------------    https://github.com/ruchee/vimrc
 
 
@@ -15,7 +15,6 @@ endif
 " 设置 path 和 tags 路径
 if g:atCompany
 else
-    " set tags+=D:/Ruchee/Files/code/projects/dev_site/vendor/laravel/tags
 endif
 
 
@@ -183,11 +182,12 @@ set shiftwidth=4
 set tabstop=4
 
 " 对部分语言设置单独的缩进
-au FileType scala,clojure,lua,ruby,eruby,dart,coffee,slim,jade,sh set shiftwidth=2
-au FileType scala,clojure,lua,ruby,eruby,dart,coffee,slim,jade,sh set tabstop=2
+au FileType scala,clojure,scheme,racket,lisp,lua,ruby,eruby,dart,coffee,slim,jade,sh set shiftwidth=2
+au FileType scala,clojure,scheme,racket,lisp,lua,ruby,eruby,dart,coffee,slim,jade,sh set tabstop=2
 
 " 根据后缀名指定文件类型
 au BufRead,BufNewFile *.h   setlocal ft=c
+au BufRead,BufNewFile *.cl  setlocal ft=lisp
 au BufRead,BufNewFile *.sql setlocal ft=mysql
 au BufRead,BufNewFile *.tpl setlocal ft=smarty
 au BufRead,BufNewFile *.txt setlocal ft=txt
@@ -342,6 +342,7 @@ let g:snipMate_no_default_aliases          = 1
 let g:snipMate                             = {}
 let g:snipMate.scope_aliases               = {}
 let g:snipMate.scope_aliases['c']          = 'cpp'
+let g:snipMate.scope_aliases['scheme']     = 'racket'
 let g:snipMate.scope_aliases['php']        = 'php,html'
 let g:snipMate.scope_aliases['smarty']     = 'smarty,thinkphp,html'
 let g:snipMate.scope_aliases['blade']      = 'blade,html'
@@ -508,6 +509,10 @@ func! Compile_Run_Code()
         exec "!scala %:t"
     elseif &filetype == "clojure"
         exec "!clojure -i %:t -r"
+    elseif &filetype == "scheme" || &filetype == "racket"
+        exec "!racket -fi %:t"
+    elseif &filetype == "lisp"
+        exec "!clisp -i %:t"
     elseif &filetype == "lua"
         exec "!lua %:t"
     elseif &filetype == "php"

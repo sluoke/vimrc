@@ -1,6 +1,6 @@
 " -----------------   Author: Ruchee
 " -----------------    Email: my@ruchee.com
-" -----------------     Date: 2014-03-02 10:27
+" -----------------     Date: 2014-03-02 10:34
 " -----------------    https://github.com/ruchee/vimrc
 
 
@@ -182,8 +182,8 @@ set shiftwidth=4
 set tabstop=4
 
 " 对部分语言设置单独的缩进
-au FileType scala,clojure,scheme,racket,lisp,lua,ruby,eruby,dart,coffee,slim,jade,sh set shiftwidth=2
-au FileType scala,clojure,scheme,racket,lisp,lua,ruby,eruby,dart,coffee,slim,jade,sh set tabstop=2
+au FileType groovy,scala,clojure,scheme,racket,lisp,lua,ruby,eruby,dart,coffee,slim,jade,sh set shiftwidth=2
+au FileType groovy,scala,clojure,scheme,racket,lisp,lua,ruby,eruby,dart,coffee,slim,jade,sh set tabstop=2
 
 " 根据后缀名指定文件类型
 au BufRead,BufNewFile *.h   setlocal ft=c
@@ -377,7 +377,7 @@ let g:airline_theme = 'badwolf'                " 设置主题
 let g:syntastic_check_on_open = 1              " 默认开启
 let g:syntastic_mode_map      = {'mode': 'active',
             \'active_filetypes':  [],
-            \'passive_filetypes': ['html', 'css', 'xhtml', 'scala', 'eruby', 'slim', 'jade', 'scss', 'less']
+            \'passive_filetypes': ['html', 'css', 'xhtml', 'groovy', 'scala', 'clojure', 'eruby', 'slim', 'jade', 'scss', 'less']
             \}                                 " 指定不需要检查的语言 [主要是因为开启这些语言的语法检查会妨碍到正常的工作]
 
 
@@ -511,6 +511,8 @@ func! Compile_Run_Code()
         endif
     elseif &filetype == "java"
         exec "!javac %:t && java %:r"
+    elseif &filetype == "groovy"
+        exec "!groovy %:t"
     elseif &filetype == "scala"
         exec "!scala %:t"
     elseif &filetype == "clojure"

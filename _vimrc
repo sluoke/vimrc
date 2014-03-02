@@ -1,6 +1,6 @@
 " -----------------   Author: Ruchee
 " -----------------    Email: my@ruchee.com
-" -----------------     Date: 2014-02-28 08:55
+" -----------------     Date: 2014-03-02 10:27
 " -----------------    https://github.com/ruchee/vimrc
 
 
@@ -503,6 +503,12 @@ func! Compile_Run_Code()
         else
             exec "!go build %:t && ./%:r"
         endif
+    elseif &filetype == "rust"
+        if g:isWIN
+            exec "!rustc %:t && %:r.exe"
+        else
+            exec "!rustc %:t && ./%:r"
+        endif
     elseif &filetype == "java"
         exec "!javac %:t && java %:r"
     elseif &filetype == "scala"
@@ -552,18 +558,18 @@ let g:vimwiki_use_mouse       = 1       " 使用鼠标映射
 let g:vimwiki_valid_html_tags = 'a,img,b,i,s,u,sub,sup,br,hr,div,del,code,red,center,left,right,h1,h2,h3,h4,h5,h6,pre,script,style'
 " 声明可以在wiki里面使用的HTML标签
 
-let blog                      = {}
+let blog = {}
 if g:isWIN
-    let blog.path             = 'D:/Ruchee/Files/mysite/wiki/'
-    let blog.path_html        = 'D:/Ruchee/Files/mysite/html/'
-    let blog.template_path    = 'D:/Ruchee/Files/mysite/templates/'
+    let blog.path          = 'D:/Ruchee/Files/mysite/wiki/'
+    let blog.path_html     = 'D:/Ruchee/Files/mysite/html/'
+    let blog.template_path = 'D:/Ruchee/Files/mysite/templates/'
 else
-    let blog.path             = '~/mysite/wiki/'
-    let blog.path_html        = '~/mysite/html/'
-    let blog.template_path    = '~/mysite/templates/'
+    let blog.path          = '~/mysite/wiki/'
+    let blog.path_html     = '~/mysite/html/'
+    let blog.template_path = '~/mysite/templates/'
 endif
-let blog.template_default     = 'site'
-let blog.template_ext         = '.html'
-let blog.auto_export          = 1
+let blog.template_default = 'site'
+let blog.template_ext     = '.html'
+let blog.auto_export      = 1
 
-let g:vimwiki_list            = [blog]
+let g:vimwiki_list = [blog]

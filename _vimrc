@@ -1,6 +1,6 @@
 " -----------------   Author: Ruchee
 " -----------------    Email: my@ruchee.com
-" -----------------     Date: 2014-03-02 10:34
+" -----------------     Date: 2014-03-03 12:25
 " -----------------    https://github.com/ruchee/vimrc
 
 
@@ -523,6 +523,8 @@ func! Compile_Run_Code()
         exec "!clisp -i %:t"
     elseif &filetype == "lua"
         exec "!lua %:t"
+    elseif &filetype == "perl"
+        exec "!perl %:t"
     elseif &filetype == "php"
         exec "!php %:t"
     elseif &filetype == "python"

@@ -1,6 +1,6 @@
 " -----------------   Author: Ruchee
 " -----------------    Email: my@ruchee.com
-" -----------------     Date: 2014-03-03 12:25
+" -----------------     Date: 2014-03-04 16:21
 " -----------------    https://github.com/ruchee/vimrc
 
 
@@ -15,6 +15,7 @@ endif
 " 设置 path 和 tags 路径
 if g:atCompany
 else
+    set tags+=D:/Ruchee/Files/code/projects/dev_site/vendor/laravel/tags
 endif
 
 
@@ -487,15 +488,15 @@ func! Compile_Run_Code()
     exec "w"
     if &filetype == "c"
         if g:isWIN
-            exec "!gcc -Wall -o %:r %:t && %:r.exe"
+            exec "!gcc -Wall -std=c99 -o %:r %:t && %:r.exe"
         else
-            exec "!gcc -Wall -o %:r %:t && ./%:r"
+            exec "!gcc -Wall -std=c99 -o %:r %:t && ./%:r"
         endif
     elseif &filetype == "cpp"
         if g:isWIN
-            exec "!g++ -Wall -o %:r %:t && %:r.exe"
+            exec "!g++ -Wall -std=c++11 -o %:r %:t && %:r.exe"
         else
-            exec "!g++ -Wall -o %:r %:t && ./%:r"
+            exec "!g++ -Wall -std=c++11 -o %:r %:t && ./%:r"
         endif
     elseif &filetype == "go"
         if g:isWIN

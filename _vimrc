@@ -1,6 +1,6 @@
 " -----------------   Author: Ruchee
 " -----------------    Email: my@ruchee.com
-" -----------------     Date: 2014-03-06 23:17
+" -----------------     Date: 2014-03-07 00:33
 " -----------------    https://github.com/ruchee/vimrc
 
 
@@ -188,6 +188,7 @@ au FileType groovy,scala,clojure,scheme,racket,lisp,lua,ruby,eruby,dart,elixir,c
 
 " 根据后缀名指定文件类型
 au BufRead,BufNewFile *.h   setlocal ft=c
+au BufRead,BufNewFile *.di  setlocal ft=d
 au BufRead,BufNewFile *.cl  setlocal ft=lisp
 au BufRead,BufNewFile *.sql setlocal ft=mysql
 au BufRead,BufNewFile *.tpl setlocal ft=smarty
@@ -498,6 +499,12 @@ func! Compile_Run_Code()
             exec "!g++ -Wall -std=c++11 -o %:r %:t && %:r.exe"
         else
             exec "!g++ -Wall -std=c++11 -o %:r %:t && ./%:r"
+        endif
+    elseif &filetype == "d"
+        if g:isWIN
+            exec "!dmd -wi %:t && %:r.exe"
+        else
+            exec "!dmd -wi %:t && ./%:r"
         endif
     elseif &filetype == "go"
         if g:isWIN

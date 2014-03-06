@@ -1,6 +1,6 @@
 " -----------------   Author: Ruchee
 " -----------------    Email: my@ruchee.com
-" -----------------     Date: 2014-03-04 16:21
+" -----------------     Date: 2014-03-06 17:19
 " -----------------    https://github.com/ruchee/vimrc
 
 
@@ -354,6 +354,7 @@ let g:snipMate.scope_aliases['jinja']      = 'jinja,html'
 let g:snipMate.scope_aliases['eruby']      = 'eruby,html'
 let g:snipMate.scope_aliases['scss']       = 'scss,css'
 let g:snipMate.scope_aliases['jst']        = 'jst,html'
+let g:snipMate.scope_aliases['dust']       = 'dust,html'
 let g:snipMate.scope_aliases['less']       = 'less,css'
 let g:snipMate.scope_aliases['mustache']   = 'mustache,html'
 let g:snipMate.scope_aliases['xhtml']      = 'html'
@@ -488,9 +489,9 @@ func! Compile_Run_Code()
     exec "w"
     if &filetype == "c"
         if g:isWIN
-            exec "!gcc -Wall -std=c99 -o %:r %:t && %:r.exe"
+            exec "!gcc -Wall -std=c11 -o %:r %:t && %:r.exe"
         else
-            exec "!gcc -Wall -std=c99 -o %:r %:t && ./%:r"
+            exec "!gcc -Wall -std=c11 -o %:r %:t && ./%:r"
         endif
     elseif &filetype == "cpp"
         if g:isWIN
